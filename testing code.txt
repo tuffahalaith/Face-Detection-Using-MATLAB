@@ -1,0 +1,16 @@
+x=100;
+y=100;
+height=350;
+width=350;
+bboxes=[x y height width];
+c=webcam;
+while true
+    e=c.snapshot;
+    IFaces = insertObjectAnnotation(e,'rectangle',bboxes,'Processing Area');
+    es=imcrop(e,bboxes);
+    es=imresize(es,[350 350]);
+    label=classify(trainedNetwork_1,es);
+    imshow(IFaces);
+    title(char(label));
+    drawnow;
+end
